@@ -22,7 +22,7 @@
                             <h3 class="text-lg font-semibold">{{ $item->pizza->name }}</h3>
                             <p>{{ $item->pizza->description }}</p>
                             <p>Количество: {{ $item->quantity }}</p>
-                            <p>Цена: {{ $item->pizza->price }} руб.</p>
+                            <p>Цена: {{ $item->pizza->price * $item->quantity }}  руб.</p>
                         </div>
                         <form action="{{ route('cart.remove', $item->id) }}" method="POST">
                             @csrf
