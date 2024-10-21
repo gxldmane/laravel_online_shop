@@ -16,12 +16,6 @@ class OrderController extends Controller
         return view('orders.index')->with(['orders' => $orders]);
     }
 
-    public function create()
-    {
-        return view('orders.create');
-    }
-
-
     public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
