@@ -22,6 +22,9 @@
                         <input type="number" name="quantity" id="quantity_{{ $pizza->id }}" value="1" min="1" class="border rounded w-20 p-2 mb-2">
                         <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2">Добавить в корзину</button>
                     </form>
+
+                    <!-- Кнопка "Подробнее" для перехода на страницу пиццы -->
+                    <a href="{{ route('pizzas.show', $pizza->id) }}" class="block mt-4 bg-green-500 text-white rounded px-4 py-2 text-center">Подробнее</a>
                 </div>
             @endforeach
         </div>

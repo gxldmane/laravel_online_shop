@@ -12,15 +12,13 @@
         <h1 class="text-2xl font-bold">Доставка Пиццы</h1>
         <nav class="bg-gray-800 p-4">
             <div class="container mx-auto flex justify-between items-center">
-                <div class="container">
-                    <a href="{{ route('home') }}" class="text-white font-bold">Главная</a>
-                    <a href="{{ route('pizzas.index') }}" class="text-white font-bold">Меню</a>
-                </div>
-
+                <a href="{{ route('home') }}" class="text-white font-bold">Главная</a>
 
                 <div class="flex items-center">
                     @auth
-                        <a href="{{ route('orders.index') }}" class="text-white mr-4">Мои заказы</a>
+                        @if(Auth::user()->isAdmin())
+                            <a href="{{ route('admin.pizzas.index') }}" class="text-white mr-4">Админка</a>
+                        @endif
                         <a href="{{ route('cart.index') }}" class="text-white mr-4">Корзина</a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
@@ -33,6 +31,7 @@
                 </div>
             </div>
         </nav>
+
     </div>
 </header>
 

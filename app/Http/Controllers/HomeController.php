@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $pizzas = Pizza::all(); // Получаем все пиццы
-        return view('home', compact('pizzas')); // Передаем пиццы в представление
+        $pizzas = Pizza::all();
+        return view('home', compact('pizzas'));
     }
 }
