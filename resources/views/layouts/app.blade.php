@@ -20,7 +20,8 @@
                             <a href="{{ route('admin.pizzas.index') }}" class="text-white mr-4">Админка</a>
                         @endif
                         <a href="{{ route('cart.index') }}" class="text-white mr-4">Корзина</a>
-                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            <a href="{{ route('orders.index') }}" class="text-white mr-4">Мои заказы</a>
+                            <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" class="text-white">Выйти</button>
                         </form>

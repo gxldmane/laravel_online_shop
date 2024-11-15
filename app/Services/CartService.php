@@ -21,6 +21,14 @@ class CartService
 
     public function createCart($pizza, $data)
     {
+        if (!Auth::user()) {
+            throw new \Exception('User is not authenticated');
+        }
+
+        if (!$pizza) {
+            throw new \Exception('Pizza is not found');
+        }
+
         $existingCartItem = CartItem::where('user_id', Auth::id())
             ->where('pizza_id', $pizza->id)
             ->first();
@@ -62,14 +70,14 @@ class CartService
         CartItem::where('user_id', Auth::id())->delete();
     }
 
-    private function getItemsSum($cartItems)
+    public function getItemsSum($cartItems)
     {
         return $cartItems->sum(function ($cartItem) {
             return $cartItem->pizza->price * $cartItem->quantity;
         });
     }
 
-    private function makeDiscount($totalPrice)
+    public function makeDiscount($totalPrice)
     {
         $userHasOrders = Order::where('user_id', Auth::id())->exists();
 

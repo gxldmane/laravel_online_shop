@@ -11,10 +11,6 @@
             <input type="text" name="name" id="name" required class="border rounded w-full p-2">
         </div>
         <div class="mb-4">
-            <label for="email" class="block mb-2">Email</label>
-            <input type="email" name="email" id="email" required class="border rounded w-full p-2">
-        </div>
-        <div class="mb-4">
             <label for="phone" class="block mb-2">Телефон</label>
             <input type="text" name="phone" id="phone" required class="border rounded w-full p-2">
         </div>
