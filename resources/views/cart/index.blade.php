@@ -12,19 +12,19 @@
             </div>
         @endif
 
-        @if($cartItems->isEmpty())
+        @if(!$cartItems)
             <p>Ваша корзина пуста.</p>
         @else
             <div class="grid grid-cols-1 gap-6">
                 @foreach($cartItems as $item)
                     <div class="border p-4 rounded shadow flex justify-between items-center">
                         <div>
-                            <h3 class="text-lg font-semibold">{{ $item->pizza->name }}</h3>
-                            <p>{{ $item->pizza->description }}</p>
-                            <p>Количество: {{ $item->quantity }}</p>
-                            <p>Цена: {{ $item->pizza->price * $item->quantity }}  руб.</p>
+                            <h3 class="text-lg font-semibold">{{ $item['pizza']['name'] }}</h3>
+                            <p>{{ $item['pizza']['description']}}</p>
+                            <p>Количество: {{ $item['quantity'] }}</p>
+                            <p>Цена: {{ $item['pizza']['price'] * $item['quantity'] }}  руб.</p>
                         </div>
-                        <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                        <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-600 text-white rounded px-4 py-2">Удалить</button>

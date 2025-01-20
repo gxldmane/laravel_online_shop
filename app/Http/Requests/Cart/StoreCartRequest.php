@@ -23,7 +23,7 @@ class StoreCartRequest extends FormRequest
     {
         return [
             'address' => 'required|string|max:255',
-            'phone' => 'required|regex:/(01)[0-9]{9}/'
+            'phone' => 'required|string|max:255',
         ];
     }
 }

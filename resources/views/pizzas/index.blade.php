@@ -11,9 +11,7 @@
                 <div class="bg-white shadow-md rounded p-4">
                     <img src="{{ $pizza->image }}" alt="{{ $pizza->name }}" class="mb-4">
                     <h2 class="text-2xl font-semibold">{{ $pizza->name }}</h2>
-                    <p class="text-gray-700">{{ $pizza->description }}</p>
                     <p class="text-lg font-bold mt-4">Цена: {{ $pizza->price }} руб.</p>
-
                     <!-- Форма для добавления в корзину -->
                     <form action="{{ route('cart.add') }}" method="POST" class="mt-4">
                         @csrf

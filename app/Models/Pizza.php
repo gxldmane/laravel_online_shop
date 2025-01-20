@@ -16,6 +16,8 @@ class Pizza extends Model
         'description',
         'price',
         'image',
+        'quantity',
+        'limited',
     ];
 
     // Отношение с корзиной

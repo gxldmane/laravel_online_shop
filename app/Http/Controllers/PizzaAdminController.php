@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Factories\DefaultPizzaFactory;
 use App\Http\Requests\Pizza\PizzaStoreRequest;
 use App\Http\Requests\Pizza\PizzaUpdateRequest;
 use App\Models\Pizza;
@@ -23,9 +24,16 @@ class PizzaAdminController extends Controller
 
     public function store(PizzaStoreRequest $request)
     {
-        $data = $request->validated();
+        $factory = new DefaultPizzaFactory();
 
-        Pizza::create($data);
+        $pizza = $factory->createPizza(
+            $request->name,
+            $request->price,
+            $request->image,
+            $request->description
+        );
+
+        $pizza->save();
 
         return redirect()->route('admin.pizzas.index')->with('success', 'Пицца успешно создана.');
     }

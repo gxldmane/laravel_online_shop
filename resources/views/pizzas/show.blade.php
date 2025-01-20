@@ -7,7 +7,8 @@
         <img src="{{ $pizza->image }}" alt="{{ $pizza->name }}" class="h-60 w-full object-cover rounded-t-lg">
         <h3 class="text-2xl font-semibold mt-2">{{ $pizza->name }}</h3>
         <p class="mt-1">{{ $pizza->description }}</p>
-        <p class="text-lg font-bold mt-2">{{ $pizza->price }} руб.</p>
+        <p class="text-lg font-bold mt-2">Цена: {{ $pizza->price }} руб.</p>
+        <p class="text-lg font-bold mt-2">Количество в наличии: {{ $pizza->quantity }} </p>
         <form action="{{ route('cart.order') }}" method="POST" class="mt-4">
             @csrf
             <input type="hidden" name="pizza_id" value="{{ $pizza->id }}">

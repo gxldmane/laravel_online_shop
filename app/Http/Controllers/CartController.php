@@ -4,25 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Cart\AddToCartRequest;
 use App\Http\Requests\Cart\StoreCartRequest;
-use App\Models\CartItem;
 use App\Models\Pizza;
-use App\Services\CartService;
+use App\Services\ApiService;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function __construct(private CartService $service)
+    public function __construct(private ApiService $service)
     {
     }
 
     public function index()
     {
-        $cartItems = CartItem::where('user_id', Auth::id())->get();
-
-        $data = $this->service->index($cartItems);
-
+        $data = $this->service->cartIndex(['userId' => Auth::id()]);
         return view('cart.index')->with([
-            'cartItems' => $cartItems,
+            'cartItems' => $data['cartItems'],
             'totalPrice' => $data['totalPrice'],
             'discount' => $data['discount']
         ]);
@@ -31,11 +27,9 @@ class CartController extends Controller
     public function addToCart(AddToCartRequest $request)
     {
         $data = $request->validated();
-
         $pizza = Pizza::findOrFail($data['pizza_id']);
-
-        $this->service->createCart($pizza, $data);
-
+        $quantity = $data['quantity'];
+        $data = $this->service->createCart(['userId' => Auth::id(), 'pizzaId' => $pizza->id, 'quantity' => $quantity]);
         return redirect()->route('cart.index')->with('success', 'Товар добавлен в корзину');
     }
 
@@ -43,19 +37,17 @@ class CartController extends Controller
     public function storeOrder(StoreCartRequest $request)
     {
         $data = $request->validated();
+        $user = Auth::user();
 
-        $cartItems = CartItem::where('user_id', Auth::id())->get();
-
-        $this->service->storeOrder($cartItems, $data);
+        $data = $this->service->storeOrder(['user' => $user, 'data' => $data]);
 
         return redirect()->route('orders.success');
     }
 
     public function removeItem($id)
     {
-        $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
-        $cartItem->delete();
-
+        $userId = Auth::id();
+        $data = $this->service->removeItem(['userId' => $userId, 'cartItemId' => $id]);
         return redirect()->route('cart.index')->with('success', 'Товар удален из корзины');
     }
 }

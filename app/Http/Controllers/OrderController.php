@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Services\ApiService;
 use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
+    public function __construct(private ApiService $service)
+    {
+    }
+
     public function index()
     {
-        $orders = Order::query()->where('user_id', Auth::id())->with('pizzas')->get();
+        $orders = $this->service->orderIndex(['userId' => Auth::id()]);
         return view('orders.index')->with(['orders' => $orders]);
     }
 }

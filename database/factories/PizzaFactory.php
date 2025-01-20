@@ -16,6 +16,8 @@ class PizzaFactory extends Factory
             'description' => $this->faker->sentence(10), // Описание
             'price' => $this->faker->numberBetween(300, 1500), // Цена в рублях
             'image' => $this->faker->imageUrl(640, 480, 'food'), // URL изображения
+            'quantity' => $this->faker->numberBetween(0, 100), // Количество
+            'limited' => $this->faker->boolean(),
         ];
     }
 }

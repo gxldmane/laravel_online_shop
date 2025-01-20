@@ -150,4 +150,4 @@ class CartServiceTest extends TestCase
         $this->expectException(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
 
         $this->cartService->createCart(Pizza::findOrFail(999), ['quantity' => 1]);
-    }}
+    } }

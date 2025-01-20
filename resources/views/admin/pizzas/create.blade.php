@@ -29,6 +29,11 @@
                 <input type="file" id="image" name="image" class="border rounded w-full py-2 px-3" required>
             </div>
 
+            <div class="mb-4">
+                <label for="season_discount">Сезонная скидка (например, 0.10 для 10%):</label>
+                <input type="number" name="season_discount" step="0.01" min="0" max="1">
+            </div>
+
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Создать</button>
             </div>

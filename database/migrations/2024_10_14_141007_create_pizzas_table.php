@@ -13,7 +13,9 @@ class CreatePizzasTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 8, 2);
-            $table->string('image')->nullable(); // Поле для изображения пиццы
+            $table->string('image')->nullable();
+            $table->integer('quantity')->default(0);
+            $table->boolean('limited')->default(true);
             $table->timestamps();
         });
     }
